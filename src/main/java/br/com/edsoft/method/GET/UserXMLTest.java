@@ -1,4 +1,4 @@
-package br.com.edsoft;
+package br.com.edsoft.method.GET;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
