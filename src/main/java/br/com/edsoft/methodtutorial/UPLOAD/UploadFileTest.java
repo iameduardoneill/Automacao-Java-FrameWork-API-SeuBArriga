@@ -1,4 +1,4 @@
-package br.com.edsoft.method.UPLOAD;
+package br.com.edsoft.methodtutorial.UPLOAD;
 
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;

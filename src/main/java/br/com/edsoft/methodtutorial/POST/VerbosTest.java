@@ -1,10 +1,10 @@
-package br.com.edsoft.method.POST;
+package br.com.edsoft.methodtutorial.POST;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.edsoft.method.User;
+import br.com.edsoft.methodtutorial.User;
 import io.restassured.RestAssured;
 import io.restassured.RestAssured.*;
 import io.restassured.builder.RequestSpecBuilder;

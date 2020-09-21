@@ -1,26 +1,18 @@
-package br.com.edsoft.method.AUTH;
+package br.com.edsoft.methodtutorial.AUTH;
 
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import io.restassured.RestAssured;
-import io.restassured.RestAssured.*;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.filter.log.LogDetail;
-import io.restassured.http.ContentType;
-import io.restassured.internal.path.xml.NodeImpl;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
-
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.hamcrest.Matcher.*;
+import org.junit.Test;
+
+import io.restassured.http.ContentType;
+import io.restassured.path.xml.XmlPath;
+import io.restassured.path.xml.XmlPath.CompatibilityMode;
 
 
 public class AuthTest {
@@ -33,7 +25,6 @@ public class AuthTest {
 		.then()
 		.log().all()
 		.statusCode(200)
-		.body("name", is("Luke Skywalker"))
 		
 		;
 	}
@@ -147,5 +138,48 @@ public class AuthTest {
 		;
 		
 	}
+
+	@Test
+	public void deveAcessarAplicacaoWeb() {
+		
+		//login na api
+		//receber o token
+		 String cookie = given()
+				.log().all()
+				.formParam("email", "ed@ed.com")
+				.formParam("senha", "eduhit00")
+				.contentType(ContentType.URLENC.withCharset("UTF-8"))
+				.when()
+				.post("http://seubarriga.wcaquino.me/logar")
+				.then()
+				.log().all()
+				.statusCode(200)
+				.extract().header("set-cookie")
+				;
+		
+		 cookie = cookie.split("=")[1].split(";")[0];
+		 System.out.println(cookie);
+	
+		 String body = given()
+					.log().all()
+					.cookie("connect.sid",cookie)
+					.when()
+					.get("http://seubarriga.wcaquino.me/contas")
+					.then()
+					.log().all()
+					.statusCode(200)
+					.body("html.body.table.tbody.tr[0].td[0]", is("Conta de teste"))
+					.extract().body().asString();
+					;
+					
+	 System.out.println("-------------------------------");				
+     XmlPath xmlPath = new XmlPath(CompatibilityMode.HTML, body);			
+	 System.out.println(xmlPath.getString("html.body.table.tbody.tr[0].td[0]"));	 
+		 
+		
+	}
+	
+	
+	
 	
 }

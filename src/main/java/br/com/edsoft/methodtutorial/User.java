@@ -1,4 +1,4 @@
-package br.com.edsoft.method;
+package br.com.edsoft.methodtutorial;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

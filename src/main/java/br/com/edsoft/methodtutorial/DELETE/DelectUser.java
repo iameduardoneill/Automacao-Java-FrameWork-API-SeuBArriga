@@ -1,4 +1,4 @@
-package br.com.edsoft.method.DELETE;
+package br.com.edsoft.methodtutorial.DELETE;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;

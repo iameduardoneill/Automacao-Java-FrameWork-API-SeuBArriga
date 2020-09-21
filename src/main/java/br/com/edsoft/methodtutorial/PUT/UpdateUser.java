@@ -1,4 +1,4 @@
-package br.com.edsoft.method.PUT;
+package br.com.edsoft.methodtutorial.PUT;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
